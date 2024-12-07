@@ -1,5 +1,17 @@
 import fetch from 'node-fetch';
 import { CronJob } from 'cron';
+import http from 'http';
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('Hello, World!\n');
+});
+
+server.listen(10000, () => {
+  console.log(`Server running at PORT: 10000/`);
+});
+
 
 // Function to call a POST API
 const callApi = async (path) => {
@@ -26,5 +38,10 @@ new CronJob('0 2 * * *', () => {
 new CronJob('0 3 * * *', () => {
   callApi('/trigger_3am_job');
 }, null, true, 'America/New_York');
+
+// Schedule 4: Fake traffic every 14 min to stop Render from sleeping
+new CronJob('*/14 * * * *', () => {
+    callApi('/dummy_endpoint');
+  }, null, true, 'America/New_York');
 
 console.log("Schedulers are running...");

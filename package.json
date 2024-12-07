@@ -1,0 +1,13 @@
+{
+    "name": "energy-dashboard-scheduler",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "cron": "^3.2.1",
+        "node-fetch": "^3.3.2"
+    }
+}
